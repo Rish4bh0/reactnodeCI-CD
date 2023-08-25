@@ -5,13 +5,15 @@ const connectDB = require("./connectDB");
 const Notes = require('./models/Notes');
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
+const path = require('path')
 
 
 connectDB();
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 //get All notes
 app.get("/api/notes", async (req, res)=> {
